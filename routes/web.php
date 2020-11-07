@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('user', 'UserController');
+
+Route::get('table/user', 'UserController@dataTables')->name('table.user');
