@@ -31,7 +31,7 @@
     <link href="{{ asset('assets/css/navbar-fixed-top.css') }}" rel="stylesheet">
 
     <!-- Custom styles for laravel -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
 
     @stack('styles')
 
@@ -78,6 +78,8 @@
 
         @yield('content')
 
+        @include('layouts._modal')
+
     </div> <!-- /container -->
 
     @include('layouts._modal')
@@ -99,7 +101,7 @@
     <script src="{{ asset('assets/js/ie10-viewport-bug-workaround.js') }}"></script>
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 
     @stack('scripts')
 </body>

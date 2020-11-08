@@ -42,7 +42,7 @@
         serverSide: true,  // proses di serverSide
         ajax: "{{ route('table.user') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'id'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'action', name: 'action'}
