@@ -1,4 +1,7 @@
-{{ Form::model($model, ['route' => 'user.store', 'method' => 'POST']) }}
+{{ Form::model($model, [
+    'route' => $model->exists ? ['user.update', $model->id] : 'user.store',
+    'method' => $model->exists ? 'PUT' : 'POST'
+]) }}
 
 <div class="form-group">
     {!! Form::label('name', 'name', ['class' => 'control-label']) !!}
@@ -11,3 +14,17 @@
 </div>
 
 {!! Form::close() !!}
+
+
+
+
+{{--
+
+
+    $model->exists
+    menghasilkan true atau false
+    mengecek apakah ada data di dalam $model
+
+
+
+    --}}

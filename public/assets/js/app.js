@@ -1,3 +1,4 @@
+// show form
 $("body").on("click", ".modal-show", function (e) {
   e.preventDefault();
 
@@ -5,7 +6,7 @@ $("body").on("click", ".modal-show", function (e) {
   let title = $(this).attr("title");
 
   $("#modal-title").text(title);
-  $("#modal-btn-save").text("Create");
+  $("#modal-btn-save").text($(this).hasClass("edit") ? "Update" : "Create");
 
   $.ajax({
     type: "GET",
@@ -19,30 +20,30 @@ $("body").on("click", ".modal-show", function (e) {
   $("#modal").modal("show");
 });
 
+// store data
 $("#modal-btn-save").on("click", function (e) {
   e.preventDefault();
 
   let form = $("#modal-body form");
   let url = form.attr("action");
   let method = $('input[name="_method"').val() == undefined ? "POST" : "PUT";
-  console.log(method);
 
-  form.find('.help-block').remove();
-  form.find('.form-group').removeClass('has-error');
+  form.find(".help-block").remove();
+  form.find(".form-group").removeClass("has-error");
 
   $.ajax({
     url,
     method,
-    data: form.serialize(),
+    data: form.serialize(), // ambil data dengan url encode di dalam form
     success: function (response) {
-      form.trigger('reset');
-      $('#modal').modal('hide');
-      $('#datatables').DataTable().ajax.reload();
+      form.trigger("reset");
+      $("#modal").modal("hide");
+      $("#datatable").DataTable().ajax.reload();
 
       swal({
-        type: 'success',
-        title: 'Success',
-        text: 'Data has been saved'
+        type: "success",
+        title: "Success",
+        text: "Data has been saved",
       });
     },
     error: function (err) {

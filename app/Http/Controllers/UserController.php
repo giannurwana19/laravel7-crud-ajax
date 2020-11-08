@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -66,7 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = User::findOrFail($id);
+        return view('pages.user.form', compact('model'));
     }
 
     /**
@@ -78,7 +79,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users,email,' . $id // .. 84
+        ]);
+
+        $model = User::findOrFail($id);
+        $model->update($request->all());
+        return $model;
     }
 
     /**
@@ -109,3 +117,9 @@ class UserController extends Controller
             ->make(true);
     }
 }
+
+
+
+// p: line 84
+//  membolehkan suatu data menggunakan email yang sama
+//  ketika id yang kita piih dan kita update bernilai sama
