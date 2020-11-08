@@ -6,7 +6,7 @@ $("body").on("click", ".modal-show", function (e) {
   let title = $(this).attr("title");
 
   $("#modal-title").text(title);
-  $("#modal-btn-save").text($(this).hasClass("edit") ? "Update" : "Create");
+  $("#modal-btn-save").removeClass('hide').text($(this).hasClass("edit") ? "Update" : "Create");
 
   $.ajax({
     type: "GET",
@@ -117,6 +117,39 @@ $('body').on('click', '.btn-delete', function (e) {
 
 });
 
+
+// show data
+$('body').on('click', '.btn-show', function (e) {
+  e.preventDefault();
+
+  let url = $(this).attr('href');
+  let title = $(this).attr('title');
+
+  $('#modal-title').text(title);
+  $('#modal-btn-save').addClass('hide');
+
+  $.ajax({
+    url,
+    dataType: 'html',
+    success: function (response) {
+      console.log(response);
+      $('#modal-body').html(response);
+    }
+  });
+
+  $('#modal').modal('show');
+})
+
+
+
+
+
+
+
+
+
+
+// h: DOKUMENTASI
 
 // p: hasil dari result
 // jika kita tekan cancel, maka akan bernilai {dismiss: cancel}
