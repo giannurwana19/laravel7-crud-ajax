@@ -63,3 +63,61 @@ $("#modal-btn-save").on("click", function (e) {
     },
   });
 });
+
+
+// delete data
+$('body').on('click', '.btn-delete', function (e) {
+  e.preventDefault();
+
+  let url = $(this).attr('href');
+  let title = $(this).attr('title');
+  let token = $('meta[name="csrf-token"]').attr('content');
+  console.log(token);
+
+  swal({
+    type: 'warning',
+    title: `Are you sure want to delete ${title}?`,
+    text: 'You won\'t be able to revert this!',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it',
+  }).then(result => { // .. 85
+    // console.log(result.value)
+
+    if (result.value) {
+
+      $.ajax({
+        url,
+        type: "POST",
+        data: {
+          '_method': 'DELETE',
+          '_token': token
+        },
+        success: function (response) {
+          $('#datatable').DataTable().ajax.reload();
+          swal({
+            type: 'success',
+            title: 'Success!',
+            text: 'Data has been deleted'
+          });
+        },
+        error: function (err) {
+          swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong'
+          })
+        }
+      })
+
+    }
+  });
+
+
+});
+
+
+// p: hasil dari result
+// jika kita tekan cancel, maka akan bernilai {dismiss: cancel}
+// jika kita tekan yes, maka akan bernilai {value: true}
