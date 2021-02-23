@@ -11,7 +11,7 @@
 ### About this project:
 - Project Name : laravel8-api-notes
 - Database Name : laravel8_api_notes
-- hosting: heroku (webcontactapp)
+- hosting: heroku (herocontactapp)
 - Project type : Backend (REST API)
 - Information : Project laravel untuk membangun RESTFUL API untuk untuk project `vue3-notes`
 ---
